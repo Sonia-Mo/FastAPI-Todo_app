@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from ..models import BasicTodo, ShowTodo
+from models import BasicTodo, ShowTodo
 
 router = APIRouter(
     prefix="/todos",
@@ -23,7 +23,7 @@ async def get_todo(todo_id: int):
             return elem
     raise HTTPException(
         status_code=404,
-        detail=f"item number {todo_id} was not found"
+        detail=f"Item number {todo_id} was not found"
     )
 
 
@@ -45,7 +45,7 @@ async def delete_todo(todo_id: int):
             return
     raise HTTPException(
         status_code=404,
-        detail=f"item number {todo_id} was not found"
+        detail=f"Item number {todo_id} was not found"
     )
 
 
@@ -58,5 +58,5 @@ async def update_todo_completion(todo_id: int, completed: bool = True):
             return elem
     raise HTTPException(
         status_code=404,
-        detail=f"item number {todo_id} was not found"
+        detail=f"Item number {todo_id} was not found"
     )
