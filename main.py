@@ -1,6 +1,10 @@
 from fastapi import FastAPI
-from routers import todos, users
+from database import engine
+import models
+from routers.todos import todos
+from routers.users import users
 
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

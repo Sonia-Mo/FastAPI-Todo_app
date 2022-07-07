@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from models import UserIn, UserOut
+from routers.users.schemas import UserIn, UserOut
 
 router = APIRouter(
     prefix="/users",
