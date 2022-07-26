@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
-# from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -7,8 +6,7 @@ from database import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)  # TODO: change back to UUID
-    username = Column(String, unique=True, index=True)
+    username = Column(String, primary_key=True, unique=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
@@ -22,7 +20,7 @@ class Todo(Base):
     todo = Column(String, index=True)
     description = Column(String, index=True)
     completion = Column(Boolean)
-    user_id = Column(Integer, ForeignKey("users.id"))  # TODO: change back to UUID
+    username = Column(String, ForeignKey("users.username"))
 
     user = relationship("User", back_populates="todos")
 

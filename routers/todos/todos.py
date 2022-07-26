@@ -1,9 +1,9 @@
 # from uuid import UUID
 from fastapi import APIRouter, HTTPException, Depends
 import models
-from database import SessionLocal
 from routers.todos.schemas import BasicTodo, ShowTodo, Todo
 from sqlalchemy.orm import Session
+from database import get_db
 
 router = APIRouter(
     prefix="/todos",
@@ -11,14 +11,6 @@ router = APIRouter(
 )
 
 router.next_id = 1
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 # Get all todos
@@ -43,7 +35,6 @@ async def get_todo(todo_id: int, db: Session = Depends(get_db)):
 # todo: user_id should be provided automatically
 @router.post("/", response_model=ShowTodo)
 async def create_todo(user_todo: BasicTodo, user_id: int, db: Session = Depends(get_db)):
-    todo = Todo(todo_id=router.next_id, user_id=user_id, **user_todo.dict())
     db_todo = models.Todo(todo_id=router.next_id, user_id=user_id, completion=False, **user_todo.dict())
     db.add(db_todo)
     db.commit()

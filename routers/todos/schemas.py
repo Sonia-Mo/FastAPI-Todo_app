@@ -1,4 +1,3 @@
-# from uuid import UUID
 from pydantic import BaseModel
 
 
@@ -16,6 +15,5 @@ class ShowTodo(BasicTodo):
 
 
 class Todo(ShowTodo):
-    # user_id: UUID
-    user_id: int  # TODO: change back to UUID
+    username: str
 

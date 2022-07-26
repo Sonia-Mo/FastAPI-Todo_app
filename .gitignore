@@ -2,3 +2,6 @@
 /__init__.py
 /routers/todos/__init__.py
 /routers/users/__init__.py
+/notes.txt
+/requirements.txt
+/sql_app.db
