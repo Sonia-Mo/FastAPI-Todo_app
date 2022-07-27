@@ -19,4 +19,5 @@ class UserOut(BaseUser):
 
 class User(BaseUser):
     hashed_password: str
+    todo_count: int = 0
 
