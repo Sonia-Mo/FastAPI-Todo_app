@@ -1,9 +1,10 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class BasicTodo(BaseModel):
     todo: str
-    description: str | None = None
+    description: Optional[str] = None
 
     class Config:
         orm_mode = True

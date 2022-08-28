@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from jose import jwt
 from pydantic import BaseModel
+from typing import Optional
 
 SECRET_KEY = "cf9774a460dd8f806c03c03078e091683e0fc68d5bc4bea9f9512ff563eed2a3"
 ALGORITHM = "HS256"
@@ -13,10 +14,10 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    username: Optional[str] = None
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
