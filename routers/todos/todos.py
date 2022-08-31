@@ -46,6 +46,7 @@ async def create_todo(user_todo: BasicTodo,
     next_id = db.query(models.User.todo_count).filter(models.User.username == user.username).as_scalar()
     db_todo = models.Todo(todo_id=next_id + 1, username=user.username, completion=False, **user_todo.dict())
     db.add(db_todo)
+    db.commit()
     update_row = db.query(models.User).filter(models.User.username == user.username)
     update_row.update({'todo_count': (next_id + 1)})
     db.commit()
